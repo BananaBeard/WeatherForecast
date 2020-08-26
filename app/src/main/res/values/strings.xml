@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">WeatherForecast</string>
+    <string name="lat_lon">Latitude: %1$f\nLongitude: %2$f</string>
+    <string name="feels_like">Feels like: %1$.0f°C</string>
+    <string name="humidity_with_label">Humidity: %1$d%%</string>
+    <string name="humidity">%1$d%%</string>
+    <string name="temperature">%1$.0f°C</string>
+    <string name="wind_speed">%1$.2f km/h</string>
+    <string name="places">Places</string>
+    <string name="map">Map</string>
+    <string name="location_name">Location name</string>
+    <string name="your_favorite_places">Your favorite places</string>
+    <string name="error_name_empty">Name can\'t be empty!</string>
+    <string name="map_help">Map help</string>
+    <string name="map_instruction">Long press on map to add a new location.</string>
+    <string name="dismiss">Dismiss</string>
+    <string name="pick_location">Pick location?</string>
+    <string name="picker_body">This location will be saved with a given name.</string>
+    <string name="save">Save</string>
+    <string name="cancel">Cancel</string>
+    <string name="error_updating">Error updating data.</string>
+    <string name="retry">Retry</string>
+</resources>

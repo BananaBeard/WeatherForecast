@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <color name="orange_light">#ff9f7d</color>
+    <color name="orange_primary">#e96e50</color>
+    <color name="orange_dark">#b13f26</color>
+    <color name="black">#FF000000</color>
+    <color name="colorBgCard">#1f1f1f</color>
+    <color name="colorBgDefault">#121212</color>
+    <color name="colorTextDefault">#FFFFFF</color>
+    <color name="colorSurface" tools:ignore="MissingDefaultResource">#262626</color>
+</resources>

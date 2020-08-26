@@ -1,0 +1,78 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Theme.WeatherForecast" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <item name="colorPrimary">@color/orange_primary</item>
+        <item name="colorOnPrimary">@color/colorBgDefault</item>
+        <item name="colorOnSecondary">@color/black</item>
+        <item name="android:statusBarColor">@color/colorBgDefault</item>
+        <item name="android:windowLightStatusBar">true</item>
+    </style>
+
+    <style name="Widget.BottomNavigationView" parent="Widget.MaterialComponents.BottomNavigationView">
+        <item name="android:fontFamily">@font/opensans_bold</item>
+    </style>
+
+    <style name="text_regular_default">
+        <item name="android:fontFamily">@font/opensans_regular</item>
+        <item name="android:textSize">17sp</item>
+        <item name="android:textColor">@color/colorTextDefault</item>
+    </style>
+
+    <style name="text_bold_default">
+        <item name="android:fontFamily">@font/opensans_bold</item>
+        <item name="android:textSize">24sp</item>
+        <item name="android:textColor">@color/colorTextDefault</item>
+    </style>
+
+    <style name="text_bold_orange">
+        <item name="android:fontFamily">@font/opensans_bold</item>
+        <item name="android:textSize">40sp</item>
+        <item name="android:textColor">@color/orange_primary</item>
+    </style>
+
+    <style name="error_appearance" parent="@android:style/TextAppearance">
+        <item name="android:textColor">@color/colorError</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="ThemeOverlay.App.PickerAlertDialog" parent="ThemeOverlay.MaterialComponents.MaterialAlertDialog">
+        <item name="colorPrimary">@color/orange_primary</item>
+        <item name="colorSurface">@color/colorBgDefault</item>
+        <item name="alertDialogStyle">@style/PickerAlertDialog</item>
+        <item name="materialAlertDialogBodyTextStyle">@style/PickerDialogListText</item>
+        <item name="materialAlertDialogTitleTextStyle">@style/PickerDialogTitleText</item>
+        <item name="buttonBarPositiveButtonStyle">@style/PositiveButtonStyle</item>
+        <item name="buttonBarNegativeButtonStyle">@style/NegativeButtonStyle</item>
+    </style>
+
+    <style name="PickerAlertDialog" parent="MaterialAlertDialog.MaterialComponents">
+        <item name="shapeAppearance">@style/PickerDialogShapeAppearance</item>
+    </style>
+
+    <style name="PickerDialogShapeAppearance" parent="ShapeAppearance.MaterialComponents.MediumComponent">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">20dp</item>
+    </style>
+
+    <style name="PickerDialogListText" parent="MaterialAlertDialog.MaterialComponents.Body.Text">
+        <item name="android:textColor">@color/colorTextDefault</item>
+        <item name="fontFamily">@font/opensans_regular</item>
+        <item name="android:textSize">15sp</item>
+    </style>
+
+    <style name="PickerDialogTitleText" parent="MaterialAlertDialog.MaterialComponents.Title.Text">
+        <item name="android:textColor">@color/orange_primary</item>
+        <item name="fontFamily">@font/opensans_bold</item>
+        <item name="android:textSize">20sp</item>
+    </style>
+
+    <style name="PositiveButtonStyle" parent="Widget.MaterialComponents.Button.TextButton.Dialog">
+        <item name="android:textColor">@color/orange_primary</item>
+        <item name="fontFamily">@font/opensans_bold</item>
+    </style>
+
+    <style name="NegativeButtonStyle" parent="Widget.MaterialComponents.Button.TextButton.Dialog">
+        <item name="android:textColor">#757575</item>
+        <item name="fontFamily">@font/opensans_bold</item>
+    </style>
+</resources>

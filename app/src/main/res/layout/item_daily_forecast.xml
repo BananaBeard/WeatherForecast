@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="forecast"
+            type="com.kovalenko.weatherforecast.features.forecast.model.domain.DailyForecast" />
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardBackgroundColor="@color/colorBgCard"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="0dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/margin_default">
+
+            <TextView
+                android:id="@+id/text_date"
+                style="@style/text_regular_default"
+                date="@{forecast.time}"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Mon, Apr 10" />
+
+            <TextView
+                android:id="@+id/text_description"
+                style="@style/text_bold_default"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@{forecast.description}"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/text_date"
+                tools:text="Sky is clear" />
+
+            <TextView
+                android:id="@+id/text_temperature"
+                temperature="@{forecast.temp}"
+                style="@style/text_bold_orange"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/icon_weather"
+                tools:text="24°C" />
+
+            <ImageView
+                android:id="@+id/icon_weather"
+                weatherIcon="@{forecast.icon}"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minWidth="90dp"
+                android:minHeight="90dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="0dp"
+                android:layout_marginEnd="5dp"
+                android:src="@drawable/icon_wind"
+                android:tint="@color/orange_primary"
+                app:layout_constraintBottom_toBottomOf="@id/text_wind"
+                app:layout_constraintEnd_toStartOf="@id/text_wind"
+                app:layout_constraintTop_toTopOf="@id/text_wind" />
+
+            <TextView
+                android:id="@+id/text_wind"
+                style="@style/text_regular_default"
+                windSpeed="@{forecast.windSpeed}"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/text_temperature"
+                tools:text="24 kph" />
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="0dp"
+                android:layout_marginEnd="5dp"
+                android:src="@drawable/icon_water"
+                android:tint="@color/orange_primary"
+                app:layout_constraintBottom_toBottomOf="@id/text_humidity"
+                app:layout_constraintEnd_toStartOf="@id/text_humidity"
+                app:layout_constraintTop_toTopOf="@id/text_humidity" />
+
+            <TextView
+                android:id="@+id/text_humidity"
+                style="@style/text_regular_default"
+                android:layout_width="wrap_content"
+                humidity="@{forecast.humidity}"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                app:layout_constraintStart_toStartOf="@id/text_wind"
+                app:layout_constraintTop_toBottomOf="@id/text_wind"
+                tools:text="84%" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+</layout>

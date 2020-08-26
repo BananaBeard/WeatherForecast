@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorBgDefault"
+        tools:context=".features.forecast.ui.list.CityListFragment">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/appbar_layout"
+            android:layout_width="match_parent"
+            android:layout_height="180dp"
+            android:backgroundTint="@android:color/transparent"
+            android:elevation="0dp"
+            android:stateListAnimator="@animator/appbar_animator">
+
+            <androidx.constraintlayout.motion.widget.MotionLayout
+                android:id="@+id/motion_list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clipChildren="false"
+                android:clipToPadding="false"
+                android:minHeight="?attr/actionBarSize"
+                app:layoutDescription="@xml/city_list_fragment_scene"
+                app:layout_scrollFlags="scroll|snap|exitUntilCollapsed">
+
+                <ImageView
+                    android:id="@+id/image_appbar_bg"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/list_bg" />
+
+                <TextView
+                    android:id="@+id/text_list_header"
+                    style="@style/text_bold_default"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/your_favorite_places" />
+
+            </androidx.constraintlayout.motion.widget.MotionLayout>
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_cities"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:overScrollMode="never"
+            android:paddingBottom="57dp"
+            android:transitionGroup="true"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            tools:listitem="@layout/item_city"
+            tools:padding="20dp" />
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>

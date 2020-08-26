@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="com.kovalenko.weatherforecast.util.Status" />
+
+        <variable
+            name="viewmodel"
+            type="com.kovalenko.weatherforecast.features.forecast.viewmodel.ForecastViewModel" />
+    </data>
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorBgDefault"
+        android:clipToPadding="false"
+        android:paddingHorizontal="@dimen/margin_default"
+        android:paddingTop="@dimen/margin_default"
+        android:transitionName="container_detail"
+        tools:context=".features.forecast.ui.detail.ForecastFragment">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/appbar_forecast"
+            android:layout_width="match_parent"
+            android:layout_height="180dp"
+            android:background="@color/colorBgDefault"
+            android:elevation="0dp"
+            android:stateListAnimator="@animator/appbar_animator">
+
+
+            <androidx.constraintlayout.motion.widget.MotionLayout
+                android:id="@+id/motion_forecast"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clipChildren="false"
+                android:clipToPadding="false"
+                android:minHeight="100dp"
+                app:layoutDescription="@xml/forecast_fragment_scene"
+                app:layout_scrollFlags="scroll|snap|exitUntilCollapsed">
+
+                <ImageView
+                    android:id="@+id/image_card_bg"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/bg_forecast_motion" />
+
+                <TextView
+                    android:id="@+id/city_name"
+                    style="@style/text_bold_default"
+                    android:ellipsize="end"
+                    android:singleLine="true"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{viewmodel.city.name}"
+                    android:textSize="30sp"
+                    tools:text="Kiev" />
+
+                <View
+                    android:id="@+id/view_motion_top"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:id="@+id/text_temp"
+                    style="@style/text_bold_orange"
+                    temperature="@{viewmodel.forecast.data.temp}"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="64sp"
+                    tools:text="29°C" />
+
+                <TextView
+                    android:id="@+id/text_description"
+                    style="@style/text_bold_default"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="@{viewmodel.forecast.data.description}"
+                    android:textSize="26sp"
+                    tools:text="Mostly cloudy" />
+
+                <TextView
+                    android:id="@+id/text_feels_like"
+                    style="@style/text_regular_default"
+                    feelsLike="@{viewmodel.forecast.data.feelsLike}"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="5dp"
+                    tools:text="Feels like: 37" />
+
+                <TextView
+                    android:id="@+id/text_humidity"
+                    style="@style/text_regular_default"
+                    humidityWithLabel="@{viewmodel.forecast.data.humidity}"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginTop="10dp"
+                    tools:text="Humidity: 80%" />
+            </androidx.constraintlayout.motion.widget.MotionLayout>
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/swipe_refresh_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="5dp"
+            android:elevation="0dp"
+            android:transitionGroup="true"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            app:refreshing="@{viewmodel.forecast.status == Status.LOADING}">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_forecast"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:overScrollMode="never"
+                android:paddingBottom="57dp"
+                android:transitionGroup="true"
+                tools:listitem="@layout/item_daily_forecast"
+                tools:padding="20dp" />
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>

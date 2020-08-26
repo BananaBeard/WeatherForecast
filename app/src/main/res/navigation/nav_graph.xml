@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/cityListFragment">
+
+    <fragment
+        android:id="@+id/cityListFragment"
+        android:name="com.kovalenko.weatherforecast.features.forecast.ui.list.CityListFragment"
+        android:label="city_list_fragment"
+        tools:layout="@layout/city_list_fragment" >
+        <action
+            android:id="@+id/showForecast"
+            app:destination="@id/forecastFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/placePickerFragment"
+        android:name="com.kovalenko.weatherforecast.features.picker.ui.PlacePickerFragment"
+        android:label="fragment_place_picker"
+        tools:layout="@layout/fragment_place_picker" />
+    <fragment
+        android:id="@+id/forecastFragment"
+        android:name="com.kovalenko.weatherforecast.features.forecast.ui.detail.ForecastFragment"
+        android:label="forecast_fragment"
+        tools:layout="@layout/forecast_fragment">
+        <argument
+            android:name="city"
+            app:argType="com.kovalenko.weatherforecast.features.forecast.model.domain.City"
+            />
+    </fragment>
+</navigation>

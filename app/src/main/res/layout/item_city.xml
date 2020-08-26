@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="city"
+            type="com.kovalenko.weatherforecast.features.forecast.model.domain.City" />
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/city_root"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:transitionName="@{`container_` + city.name}"
+        app:cardBackgroundColor="@color/colorBgCard"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="0dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/margin_default">
+
+            <TextView
+                android:id="@+id/text_name"
+                style="@style/text_bold_default"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{city.name}"
+                android:textAlignment="center"
+                android:textSize="30sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Kiev" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+</layout>
