@@ -29,7 +29,6 @@ class ForecastListAdapter :
             viewDataBinding.apply {
                 forecast = item
                 executePendingBindings()
-
             }
         }
     }
