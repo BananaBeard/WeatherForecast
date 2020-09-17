@@ -19,9 +19,7 @@
         android:layout_gravity="bottom|end"
         android:layout_marginEnd="20dp"
         android:layout_marginBottom="100dp"
-        android:backgroundTint="@color/colorBgCard"
         app:borderWidth="0dp"
         app:fabSize="normal"
-        app:srcCompat="@drawable/ic_help"
-        app:tint="@color/orange_primary" />
+        app:srcCompat="@drawable/ic_help" />
 </FrameLayout>
