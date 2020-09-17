@@ -5,7 +5,6 @@ import android.view.HapticFeedbackConstants
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import com.google.android.gms.maps.GoogleMap
@@ -13,7 +12,7 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import com.google.android.material.textfield.TextInputEditText
+import com.google.android.material.textfield.TextInputLayout
 import com.google.android.material.transition.MaterialElevationScale
 import com.google.android.material.transition.MaterialFadeThrough
 import com.kovalenko.weatherforecast.R
@@ -52,7 +51,7 @@ class PlacePickerFragment : Fragment() {
         val mapFragment = childFragmentManager.findFragmentById(R.id.map_fragment) as SupportMapFragment?
         mapFragment?.getMapAsync(callback)
         fab_help.setOnClickListener {
-            MaterialAlertDialogBuilder(requireActivity(), R.style.ThemeOverlay_App_PickerAlertDialog)
+            MaterialAlertDialogBuilder(requireActivity())
                     .setTitle(getString(R.string.map_help))
                     .setMessage(getString(R.string.map_instruction))
                     .setPositiveButton(getString(R.string.dismiss)) { dialog, _ ->
@@ -64,7 +63,7 @@ class PlacePickerFragment : Fragment() {
 
     private fun onMapLongPress(latLng: LatLng) {
         view?.performHapticFeedback(HapticFeedbackConstants.LONG_PRESS)
-        val dialog = MaterialAlertDialogBuilder(requireActivity(), R.style.ThemeOverlay_App_PickerAlertDialog)
+        val dialog = MaterialAlertDialogBuilder(requireActivity())
                 .setTitle(getString(R.string.pick_location))
                 .setMessage(getString(R.string.picker_body))
                 .setView(R.layout.dialog_picker)
@@ -76,14 +75,13 @@ class PlacePickerFragment : Fragment() {
                 .show()
 
         dialog.getButton(AlertDialog.BUTTON_POSITIVE).setOnClickListener {
-            val et = (dialog as AlertDialog).findViewById<TextInputEditText>(R.id.input_city)
-            val text = et?.text.toString()
+            val inputLayout = (dialog as AlertDialog).findViewById<TextInputLayout>(R.id.input_layout_city)
+            val text = inputLayout?.editText?.text.toString()
             if (text.isEmpty()) {
-                et?.error = getString(R.string.error_name_empty)
+                inputLayout?.error = getString(R.string.error_name_empty)
             } else {
                 pickerViewModel.saveLocation(text, latLng)
                 dialog.dismiss()
-                Toast.makeText(activity, text, Toast.LENGTH_LONG).show()
             }
         }
     }
