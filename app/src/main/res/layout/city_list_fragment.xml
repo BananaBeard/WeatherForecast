@@ -8,9 +8,9 @@
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:id="@+id/list_root"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/colorBgDefault"
         tools:context=".features.forecast.ui.list.CityListFragment">
 
         <com.google.android.material.appbar.AppBarLayout
@@ -24,10 +24,10 @@
             <androidx.constraintlayout.motion.widget.MotionLayout
                 android:id="@+id/motion_list"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:clipChildren="false"
                 android:clipToPadding="false"
-                android:minHeight="?attr/actionBarSize"
+                android:minHeight="80dp"
                 app:layoutDescription="@xml/city_list_fragment_scene"
                 app:layout_scrollFlags="scroll|snap|exitUntilCollapsed">
 
@@ -44,7 +44,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/your_favorite_places" />
-
             </androidx.constraintlayout.motion.widget.MotionLayout>
         </com.google.android.material.appbar.AppBarLayout>
 
@@ -52,8 +51,9 @@
             android:id="@+id/recycler_cities"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layoutAnimation="@anim/recycler_layout_animation"
+            tools:layoutAnimation="@null"
             android:overScrollMode="never"
-            android:paddingBottom="57dp"
             android:transitionGroup="true"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
             tools:listitem="@layout/item_city"
