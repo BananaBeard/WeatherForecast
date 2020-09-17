@@ -5,9 +5,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.Fragment
 import androidx.interpolator.view.animation.FastOutSlowInInterpolator
 import androidx.lifecycle.Observer
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.appbar.AppBarLayout
@@ -20,7 +23,9 @@ import com.kovalenko.weatherforecast.features.forecast.viewmodel.ForecastViewMod
 import com.kovalenko.weatherforecast.persistence.Resource
 import com.kovalenko.weatherforecast.util.Status
 import com.kovalenko.weatherforecast.view.MarginItemDecorator
+import com.kovalenko.weatherforecast.view.setMarginTop
 import kotlinx.android.synthetic.main.forecast_fragment.*
+import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ForecastFragment : Fragment() {
@@ -37,12 +42,13 @@ class ForecastFragment : Fragment() {
             interpolator = FastOutSlowInInterpolator()
             duration = resources.getInteger(R.integer.transition_default_duration).toLong()
             scrimColor = Color.TRANSPARENT
+            containerColor = Color.TRANSPARENT
         }
     }
 
     override fun onCreateView(
-            inflater: LayoutInflater, container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View? {
         viewDataBinding = ForecastFragmentBinding.inflate(inflater, container, false).apply {
             lifecycleOwner = this@ForecastFragment.viewLifecycleOwner
@@ -56,6 +62,7 @@ class ForecastFragment : Fragment() {
         coordinateMotion()
         setupSubscriptions()
         setupRecycler()
+        setupFullscreen()
         forecastViewModel.loadWeather(args.city)
     }
 
@@ -67,12 +74,12 @@ class ForecastFragment : Fragment() {
         forecastAdapter = ForecastListAdapter()
         viewDataBinding.recyclerForecast.apply {
             layoutManager =
-                    LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+                LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
             adapter = forecastAdapter
             addItemDecoration(
-                    MarginItemDecorator(
-                            resources.getDimension(R.dimen.margin_default).toInt()
-                    )
+                MarginItemDecorator(
+                    resources.getDimension(R.dimen.margin_default).toInt()
+                )
             )
         }
 
@@ -81,25 +88,39 @@ class ForecastFragment : Fragment() {
                 forecastViewModel.loadWeather(args.city)
             }
             setColorSchemeColors(
-                    resources.getColor(R.color.orange_primary, requireActivity().theme)
+                resources.getColor(R.color.orange_primary, requireActivity().theme)
             )
-            setProgressViewOffset(false, 0, 120)
+            setProgressViewOffset(false, 0, 170)
+        }
+    }
+
+    private fun setupFullscreen() {
+        ViewCompat.setOnApplyWindowInsetsListener(viewDataBinding.root) { v, insets ->
+            insets.getInsets(WindowInsetsCompat.Type.systemBars()).top.apply {
+                if (this > 0) {
+                    viewDataBinding.forecastRoot.setMarginTop(this)
+                }
+            }
+            insets
         }
     }
 
     private fun onForecastUpdate(forecastResource: Resource<Forecast?>) {
-        forecastAdapter?.submitList(forecastResource.data?.daily)
-        if (forecastResource.status == Status.ERROR) {
-            view?.let {
-                Snackbar.make(it, getString(R.string.error_updating), Snackbar.LENGTH_LONG)
+        startPostponedEnterTransition()
+        viewLifecycleOwner.lifecycleScope.launch {
+            forecastAdapter?.submitList(forecastResource.data?.daily)
+            viewDataBinding.recyclerForecast.scheduleLayoutAnimation()
+            if (forecastResource.status == Status.ERROR) {
+                view?.let {
+                    Snackbar.make(it, forecastResource.message.toString(), Snackbar.LENGTH_LONG)
                         .setAction(getString(R.string.retry)) {
                             forecastViewModel.loadWeather(args.city)
                         }
                         .setAnchorView(requireActivity().findViewById(R.id.navigation_main))
                         .show()
+                }
             }
         }
-        startPostponedEnterTransition()
     }
 
     private fun coordinateMotion() {
