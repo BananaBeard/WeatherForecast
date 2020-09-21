@@ -6,27 +6,13 @@ plugins {
     id("androidx.navigation.safeargs.kotlin")
 }
 
-apply(from = "../versions.gradle.kts")
-val kotlinVersion: String by extra
-val androidXVersion: String by extra
-val appcompatVersion: String by extra
-val materialVersion: String by extra
-val navigationVersion: String by extra
-val coroutinesVersion: String by extra
-val okhttpVersion: String by extra
-val retrofitVersion: String by extra
-val koinVersion: String by extra
-val roomVersion: String by extra
-val archLifecycleVersion: String by extra
-val constraintVersion: String by extra
-
 android {
-    compileSdkVersion(29)
+    compileSdkVersion(30)
 
     defaultConfig {
         applicationId = "com.kovalenko.weatherforecast"
         minSdkVersion(23)
-        targetSdkVersion(29)
+        targetSdkVersion(30)
         versionCode = 1
         versionName = "1.0"
 
@@ -52,37 +38,38 @@ android {
 }
 
 dependencies {
-    implementation("org.jetbrains.kotlin:kotlin-stdlib:$kotlinVersion")
-    implementation("androidx.core:core-ktx:$androidXVersion")
-    implementation("androidx.appcompat:appcompat:$appcompatVersion")
-    implementation("com.google.android.material:material:$materialVersion")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib:${Versions.kotlinVersion}")
+    implementation("androidx.core:core-ktx:${Versions.androidXVersion}")
+    implementation("androidx.appcompat:appcompat:${Versions.appcompatVersion}")
+    implementation("com.google.android.material:material:${Versions.materialVersion}")
 
-    implementation("androidx.constraintlayout:constraintlayout:$constraintVersion")
+    implementation("androidx.constraintlayout:constraintlayout:${Versions.constraintVersion}")
 
-    implementation("androidx.lifecycle:lifecycle-livedata-ktx:$archLifecycleVersion")
-    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:$archLifecycleVersion")
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:${Versions.archLifecycleVersion}")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.archLifecycleVersion}")
 
-    implementation("androidx.navigation:navigation-fragment-ktx:$navigationVersion")
-    implementation("androidx.navigation:navigation-ui-ktx:$navigationVersion")
+    implementation("androidx.navigation:navigation-fragment-ktx:${Versions.navigationVersion}")
+    implementation("androidx.navigation:navigation-ui-ktx:${Versions.navigationVersion}")
 
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion")
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutinesVersion")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.coroutinesVersion}")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:${Versions.coroutinesVersion}")
 
-    implementation("com.squareup.okhttp3:okhttp:$okhttpVersion")
-    implementation("com.squareup.okhttp3:logging-interceptor:$okhttpVersion")
+    implementation("com.squareup.okhttp3:okhttp:${Versions.okhttpVersion}")
+    implementation("com.squareup.okhttp3:logging-interceptor:${Versions.okhttpVersion}")
 
-    implementation("com.squareup.retrofit2:retrofit:$retrofitVersion")
-    implementation("com.squareup.retrofit2:converter-gson:$retrofitVersion")
+    implementation("com.squareup.retrofit2:retrofit:${Versions.retrofitVersion}")
+    implementation("com.squareup.retrofit2:converter-gson:${Versions.retrofitVersion}")
 
-    implementation("org.koin:koin-android:$koinVersion")
-    implementation("org.koin:koin-androidx-scope:$koinVersion")
-    implementation("org.koin:koin-androidx-viewmodel:$koinVersion")
+    implementation("org.koin:koin-android:${Versions.koinVersion}")
+    implementation("org.koin:koin-androidx-scope:${Versions.koinVersion}")
+    implementation("org.koin:koin-androidx-viewmodel:${Versions.koinVersion}")
 
-    implementation("androidx.room:room-ktx:$roomVersion")
-    implementation("androidx.room:room-runtime:$roomVersion")
+    implementation("androidx.room:room-ktx:${Versions.roomVersion}")
+    implementation("androidx.room:room-runtime:${Versions.roomVersion}")
+    kapt("androidx.room:room-compiler:${Versions.roomVersion}")
+
     implementation("androidx.legacy:legacy-support-v4:1.0.0")
     implementation("com.google.android.gms:play-services-maps:17.0.0")
-    kapt("androidx.room:room-compiler:$roomVersion")
 
     implementation("com.squareup.picasso:picasso:2.71828")
 

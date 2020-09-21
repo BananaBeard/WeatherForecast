@@ -2,11 +2,18 @@ package com.kovalenko.weatherforecast.persistence
 
 import androidx.annotation.MainThread
 import androidx.annotation.WorkerThread
+import com.kovalenko.weatherforecast.network.ApiEmptyResponse
 import com.kovalenko.weatherforecast.network.ApiErrorResponse
 import com.kovalenko.weatherforecast.network.ApiResponse
 import com.kovalenko.weatherforecast.network.ApiSuccessResponse
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.emitAll
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.flowOn
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.collect
 
 abstract class NetworkBoundResource<ResultType, RequestType> {
     fun asFlow() = flow {
@@ -21,6 +28,9 @@ abstract class NetworkBoundResource<ResultType, RequestType> {
                     }
                     is ApiErrorResponse -> {
                         emitAll(loadFromDb().map { Resource.error(response.errorMessage, it) })
+                    }
+                    is ApiEmptyResponse -> {
+                        emitAll(loadFromDb().map { Resource.error("Empty response", it) })
                     }
                 }
             }

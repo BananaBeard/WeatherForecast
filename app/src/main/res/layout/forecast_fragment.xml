@@ -13,9 +13,10 @@
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:id="@+id/forecast_root"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/colorBgDefault"
+        android:background="?android:colorBackground"
         android:clipToPadding="false"
         android:paddingHorizontal="@dimen/margin_default"
         android:paddingTop="@dimen/margin_default"
@@ -26,7 +27,7 @@
             android:id="@+id/appbar_forecast"
             android:layout_width="match_parent"
             android:layout_height="180dp"
-            android:background="@color/colorBgDefault"
+            android:background="@android:color/transparent"
             android:elevation="0dp"
             android:stateListAnimator="@animator/appbar_animator">
 
@@ -50,10 +51,10 @@
                 <TextView
                     android:id="@+id/city_name"
                     style="@style/text_bold_default"
-                    android:ellipsize="end"
-                    android:singleLine="true"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:singleLine="true"
                     android:text="@{viewmodel.city.name}"
                     android:textSize="30sp"
                     tools:text="Kiev" />
@@ -118,8 +119,8 @@
                 android:id="@+id/recycler_forecast"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layoutAnimation="@anim/recycler_layout_animation"
                 android:overScrollMode="never"
-                android:paddingBottom="57dp"
                 android:transitionGroup="true"
                 tools:listitem="@layout/item_daily_forecast"
                 tools:padding="20dp" />

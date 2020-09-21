@@ -15,7 +15,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:transitionName="@{`container_` + city.name}"
-        app:cardBackgroundColor="@color/colorBgCard"
         app:cardCornerRadius="20dp"
         app:cardElevation="0dp">
 
